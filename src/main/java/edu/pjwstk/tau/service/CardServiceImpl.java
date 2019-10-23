@@ -3,21 +3,23 @@ package edu.pjwstk.tau.service;
 
 
 import edu.pjwstk.tau.domain.Card;
-import edu.pjwstk.tau.domain.User;
 
-import java.util.HashMap;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CardServiceImpl implements CardService {
 
 	private HashMap<Integer, Card> cardHashMap;
+	private DateServiceProxy dateService;
+	private EnumSet<OperationType> activeOperationsForTimeAssign;
 
 
-	public CardServiceImpl() {
+	public CardServiceImpl(DateServiceProxy dateService) {
+		this.dateService = dateService;
 		this.cardHashMap = new HashMap<>();
-
+		this.activeOperationsForTimeAssign = OperationType.ALL_OPERATION;
 	}
 
 	@Override
@@ -26,12 +28,18 @@ public class CardServiceImpl implements CardService {
 		if(cardHashMap.get(object.getId()) != null) {
 			throw new IllegalArgumentException();
 		}
-		cardHashMap.put(object.getId(),createCardObject(object));
+
+		Card cardToSave = createDeepClone(object);
+		assignDateCreation(cardToSave);
+		cardHashMap.put(object.getId(), cardToSave);
+
 		return cardHashMap.get(object.getId());
 	}
 
 	@Override
 	public Card update(Card object) {
+
+		this.assignTimeModification(object);
 		Card card = cardHashMap.replace(object.getId(),object);
 
 		if(card == null ){
@@ -44,6 +52,7 @@ public class CardServiceImpl implements CardService {
 	@Override
 	public boolean delete(int id) {
 		boolean isRemoved;
+
 		Card card = cardHashMap.remove(id);
 
 		if( card != null){
@@ -52,39 +61,63 @@ public class CardServiceImpl implements CardService {
 
 			throw new NullPointerException();
 		}
-
 		return isRemoved;
 	}
 
 	@Override
 	public Optional<Card> read(int id) {
+		Optional<Card> card =  Optional.of(cardHashMap.get(id));
+		card.ifPresent(this::assignTimeRead);
 
-		return Optional.of(cardHashMap.get(id));
+		return card;
 	}
 
 	@Override
 	public List<Card> readAll() {
-
 		return cardHashMap.keySet().stream()
-				.map((x) -> createCardObject(cardHashMap.get(x)) )
+				.map((x) -> {
+							Card card = createDeepClone(cardHashMap.get(x));
+							assignTimeRead(card);
+							return card;
+						})
 				.collect(Collectors.toList());
 
 	}
 
-	private Card createCardObject(Card object) {
-		return new Card.Builder()
-				.id(object.getId())
-				.title(object.getTitle())
-				.description(object.getDescription())
-				.cardStatus(object.getCardStatus())
-				.owner(new User.Builder()
-						.id(object.getOwner().getId())
-						.email(object.getOwner().getEmail())
-						.name(object.getOwner().getName())
-						.surname(object.getOwner().getSurname())
-						.password(object.getOwner().getPassword())
-						.build()
-				)
-				.build();
+	public void turnOffTimeAssign(OperationType ... operationTypes){
+		List<OperationType> operationsToRemove = new ArrayList<>(Arrays.asList(operationTypes));
+		this.activeOperationsForTimeAssign.removeAll(operationsToRemove);
 	}
+
+	public void turnOnTimeAssign(OperationType ... operationTypes){
+
+		EnumSet<OperationType> operationToAdd = Arrays.stream(operationTypes)
+				.collect(Collectors.toCollection(()-> EnumSet.noneOf(OperationType.class)));
+
+		activeOperationsForTimeAssign.addAll(operationToAdd);
+	}
+
+	private void assignDateCreation(Card card){
+		if(activeOperationsForTimeAssign.contains(OperationType.ADD)){
+			card.getCardHistory().setAddedTime(dateService.getNow());
+		}
+	}
+
+	private void assignTimeModification(Card card){
+		if(activeOperationsForTimeAssign.contains(OperationType.UPDATE)) {
+			card.getCardHistory().setModificationTime(dateService.getNow());
+		}
+	}
+
+	private void assignTimeRead(Card card) {
+		if(activeOperationsForTimeAssign.contains(OperationType.READ)){
+			card.getCardHistory().setReadingTime(dateService.getNow());
+		}
+	}
+
+	private Card createDeepClone(Card object) {
+		return object.deepClone();
+	}
+
+
 }

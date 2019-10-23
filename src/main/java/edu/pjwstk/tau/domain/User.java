@@ -1,21 +1,16 @@
 package edu.pjwstk.tau.domain;
 
+import lombok.Builder;
+
 import java.util.Objects;
 
-public class User {
+@Builder
+public class User implements  Cloneable, DeepClone<User>{
 	private int id;
 	private String name;
 	private String surname;
 	private String password;
 	private String email;
-
-	private User(Builder builder) {
-		setId(builder.id);
-		setName(builder.name);
-		setSurname(builder.surname);
-		setPassword(builder.password);
-		setEmail(builder.email);
-	}
 
 	public int getId() {
 		return id;
@@ -25,9 +20,7 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
+	public String getName() { return name; }
 
 	public void setName(String name) {
 		this.name = name;
@@ -83,53 +76,18 @@ public class User {
 	}
 
 	@Override
-	public String toString() {
-		return "User{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", surname='" + surname + '\'' +
-				", password='" + password + '\'' +
-				", email='" + email + '\'' +
-				'}';
+	protected User clone() throws CloneNotSupportedException {
+		return (User) super.clone();
 	}
 
-	public static final class Builder {
-		private int id;
-		private String name;
-		private String surname;
-		private String password;
-		private String email;
-
-		public Builder() {
+	@Override
+	public User deepClone() {
+		User user;
+		try {
+			user =  this.clone();
+		} catch (CloneNotSupportedException e) {
+			return null;
 		}
-
-		public Builder id(int val) {
-			id = val;
-			return this;
-		}
-
-		public Builder name(String val) {
-			name = val;
-			return this;
-		}
-
-		public Builder surname(String val) {
-			surname = val;
-			return this;
-		}
-
-		public Builder password(String val) {
-			password = val;
-			return this;
-		}
-
-		public Builder email(String val) {
-			email = val;
-			return this;
-		}
-
-		public User build() {
-			return new User(this);
-		}
+		return user;
 	}
 }
