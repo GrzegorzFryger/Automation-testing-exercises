@@ -299,7 +299,16 @@ public class CardServiceImplTest {
 		cardService.turnOffTimeAssign(OperationType.ADD);
 		cardService.create(firstCard);
 
-
 		verify(dateService, never()).getNow();
 	}
+
+	@Test
+	public void Should_InvokeMethodAtLeastOnce_When_CardWasCreated() {
+		cardService.turnOnTimeAssign(OperationType.ADD);
+		cardService.create(firstCard);
+		cardService.create(secondCard);
+
+		verify(dateService, atLeastOnce()).getNow();
+	}
+
 }
