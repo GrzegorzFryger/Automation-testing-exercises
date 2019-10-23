@@ -286,7 +286,6 @@ public class CardServiceImplTest {
 	}
 
 	/* Example of usage additional methods form mockito package  */
-
 	@Test
 	public void Should_InvokeMethodOnlyOnce_When_CardWasCreated() {
 		cardService.create(firstCard);
@@ -327,4 +326,13 @@ public class CardServiceImplTest {
 		verify(dateService, atLeast(3)).getNow();
 		verify(dateService, atMost(3)).getNow();
 	}
+
+	@Test
+	public void Should_InvokeGetTimeMethodOnly_When_CardWasCreated() {
+		cardService.turnOnTimeAssign(OperationType.ADD);
+		cardService.create(firstCard);
+
+		verify(dateService, only()).getNow();
+	}
+	/* Example of usage additional methods form mockito package  */
 }
