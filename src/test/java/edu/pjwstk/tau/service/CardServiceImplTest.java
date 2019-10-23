@@ -285,7 +285,12 @@ public class CardServiceImplTest {
 		assertEquals(this.nowTime,createdSecondCard.getCardHistory().getAddedTime());
 	}
 
-
+	@Test
+	public void Should_InvokeMethodOnlyOnce_When_CardWasCreated() {
+		cardService.create(firstCard);
+		
+		verify(dateService, times(1)).getNow();
+	}
 
 
 }
