@@ -285,12 +285,21 @@ public class CardServiceImplTest {
 		assertEquals(this.nowTime,createdSecondCard.getCardHistory().getAddedTime());
 	}
 
+	/* Example of usage additional methods form mockito package  */
+
 	@Test
 	public void Should_InvokeMethodOnlyOnce_When_CardWasCreated() {
 		cardService.create(firstCard);
-		
+
 		verify(dateService, times(1)).getNow();
 	}
 
+	@Test
+	public void Should_NeverInvokeMethod_When_CardWasCreated() {
+		cardService.turnOffTimeAssign(OperationType.ADD);
+		cardService.create(firstCard);
 
+
+		verify(dateService, never()).getNow();
+	}
 }
