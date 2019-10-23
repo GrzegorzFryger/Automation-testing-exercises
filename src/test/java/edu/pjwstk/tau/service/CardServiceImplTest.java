@@ -319,4 +319,12 @@ public class CardServiceImplTest {
 		verify(dateService, atLeast(3)).getNow();
 	}
 
+	@Test
+	public void Should_InvokeMethodAtMostThreeTime_When_CardWasCreated() {
+		cardService.turnOnTimeAssign(OperationType.ADD);
+		cardList.forEach(cardService::create);
+
+		verify(dateService, atLeast(3)).getNow();
+		verify(dateService, atMost(3)).getNow();
+	}
 }
