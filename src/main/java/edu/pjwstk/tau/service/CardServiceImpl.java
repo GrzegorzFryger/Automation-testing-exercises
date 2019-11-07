@@ -7,6 +7,8 @@ import edu.pjwstk.tau.domain.Card;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CardServiceImpl implements CardService {
@@ -84,6 +86,18 @@ public class CardServiceImpl implements CardService {
 
 	}
 
+	@Override
+	public List<Card> findByRegexOnDescription(String regex) {
+
+		return cardHashMap.values().stream()
+				.filter(card -> createPredicateFromString(regex).test(card.getDescription()))
+				.collect(Collectors.toList());
+	}
+
+	private Predicate<String> createPredicateFromString(String s) {
+		return Pattern.compile(s).asPredicate();
+	}
+
 	public void turnOffTimeAssign(OperationType ... operationTypes){
 		List<OperationType> operationsToRemove = new ArrayList<>(Arrays.asList(operationTypes));
 		this.activeOperationsForTimeAssign.removeAll(operationsToRemove);
@@ -119,8 +133,5 @@ public class CardServiceImpl implements CardService {
 		return object.deepClone();
 	}
 
-	@Override
-	public List<Card> findByRegexOnDescription(String s) {
-		return null;
-	}
+
 }

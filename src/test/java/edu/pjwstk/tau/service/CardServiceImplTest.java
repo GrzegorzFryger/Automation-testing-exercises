@@ -342,8 +342,9 @@ public class CardServiceImplTest {
 	@Test
 	public void Should_FindCardBasedOnFiledDescription_When_MethodFindByRegexWasCall() {
 		cardList.forEach(cardService::create);
-		Card cardWithIdNumber5 = cardList.get(3);
+		List<Card> cardWithIdNumber5 = Arrays.asList(cardList.get(2));
 
-		assertEquals(cardList.get(3),cardService.findByRegexOnDescription("(^.*5.*$)"));
+		assertEquals(cardWithIdNumber5, cardService.findByRegexOnDescription("(^.*5.*$)"));
 	}
+
 }
