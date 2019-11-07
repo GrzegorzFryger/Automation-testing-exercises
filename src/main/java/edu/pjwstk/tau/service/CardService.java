@@ -7,4 +7,5 @@ import java.util.List;
 public interface CardService extends GenericService<Card> {
 
 	List<Card> findByRegexOnDescription(String s);
+	boolean delete(List<Card> carToRemove);
 }

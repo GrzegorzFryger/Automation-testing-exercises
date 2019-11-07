@@ -11,11 +11,15 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -345,6 +349,19 @@ public class CardServiceImplTest {
 		List<Card> cardWithIdNumber5 = Arrays.asList(cardList.get(2));
 
 		assertEquals(cardWithIdNumber5, cardService.findByRegexOnDescription("(^.*5.*$)"));
+	}
+
+	@Test
+	public void Should_RemoveCards_When_MethodDeleteWasCallWithList() {
+		cardList.forEach(cardService::create);
+
+		List<Card> carToRemove = new ArrayList<>();
+		carToRemove.add(cardList.get(0));
+		carToRemove.add(cardList.get(1));
+
+		cardService.delete(carToRemove);
+		assertThat(cardService.readAll(), hasSize(1));
+		assertThat(cardService.readAll(), containsInAnyOrder(cardList.get(2)));
 	}
 
 }

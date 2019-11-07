@@ -94,6 +94,11 @@ public class CardServiceImpl implements CardService {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public boolean delete(List<Card> carToRemove) {
+		return false;
+	}
+
 	private Predicate<String> createPredicateFromString(String s) {
 		return Pattern.compile(s).asPredicate();
 	}
@@ -132,6 +137,5 @@ public class CardServiceImpl implements CardService {
 	private Card createDeepClone(Card object) {
 		return object.deepClone();
 	}
-
 
 }
