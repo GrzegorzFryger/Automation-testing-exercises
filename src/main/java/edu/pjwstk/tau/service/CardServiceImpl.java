@@ -119,5 +119,8 @@ public class CardServiceImpl implements CardService {
 		return object.deepClone();
 	}
 
-
+	@Override
+	public List<Card> findByRegexOnDescription(String s) {
+		return null;
+	}
 }

@@ -13,8 +13,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -335,4 +338,12 @@ public class CardServiceImplTest {
 		verify(dateService, only()).getNow();
 	}
 	/* Example of usage additional methods form mockito package  */
+
+	@Test
+	public void Should_FindCardBasedOnFiledDescription_When_MethodFindByRegexWasCall() {
+		cardList.forEach(cardService::create);
+		Card cardWithIdNumber5 = cardList.get(3);
+
+		assertEquals(cardList.get(3),cardService.findByRegexOnDescription("(^.*5.*$)"));
+	}
 }
