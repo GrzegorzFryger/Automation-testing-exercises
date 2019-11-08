@@ -358,8 +358,9 @@ public class CardServiceImplTest {
 		List<Card> carToRemove = new ArrayList<>();
 		carToRemove.add(cardList.get(0));
 		carToRemove.add(cardList.get(1));
-
+		
 		cardService.delete(carToRemove);
+
 		assertThat(cardService.readAll(), hasSize(1));
 		assertThat(cardService.readAll(), containsInAnyOrder(cardList.get(2)));
 	}

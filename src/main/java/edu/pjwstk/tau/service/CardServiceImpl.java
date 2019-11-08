@@ -83,7 +83,6 @@ public class CardServiceImpl implements CardService {
 							return card;
 						})
 				.collect(Collectors.toList());
-
 	}
 
 	@Override
@@ -96,7 +95,12 @@ public class CardServiceImpl implements CardService {
 
 	@Override
 	public boolean delete(List<Card> carToRemove) {
-		return false;
+		if(carToRemove.isEmpty()) {
+			return false;
+		} else {
+			cardHashMap.entrySet().removeIf(e -> carToRemove.contains(e.getValue()) );
+			return true;
+		}
 	}
 
 	private Predicate<String> createPredicateFromString(String s) {
