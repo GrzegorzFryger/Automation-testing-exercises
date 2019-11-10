@@ -32,7 +32,7 @@ public class CardServiceStep {
 		cardService.turnOffTimeAssign(OperationType.ADD,OperationType.READ, OperationType.UPDATE);
 	}
 
-	@Given("User create cards with descryption about $descryption1, $descryption2, $descryption3")
+	@Given("User create cards with description about $description1, $description2, $description3")
 	public void createCardsWithdescryption(String description1, String description2, String description3 ) {
 		cardService.clean();
 
@@ -166,7 +166,7 @@ public class CardServiceStep {
 				.collect(Collectors.toList());
 	}
 
-	@When("user wants find card with descrition about $regex")
+	@When("user wants find card with description about $regex")
 	public void findCardByRegex(String regex){
 	  cardListWithRegex	= cardService.findByRegexOnDescription(regex);
 	}
@@ -176,7 +176,7 @@ public class CardServiceStep {
 	    cardService.delete(cardListToRemove);
 	}
 
-	@Then("service returned cards with descryption contains $word")
+	@Then("service returned cards with description contains $word")
 	public void cardsFromDbContainsWord(String word){
 		cardListWithRegex.forEach(x -> assertTrue(x.getDescription().contains(word)));
 	}
@@ -184,7 +184,7 @@ public class CardServiceStep {
 	public void cardsFromDbContainsWord(){
 		assertThat(cardService.readAll(), not(contains(cardListToRemove)));
 	}
-	@Then("size elements in datebase is $size")
+	@Then("size elements in database is $size")
 	public void checkSizeElementsInDb(int size){
 		assertEquals(cardService.readAll().size(), size );
 	}

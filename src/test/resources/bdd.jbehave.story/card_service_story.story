@@ -1,9 +1,9 @@
 Scenario:the user has created three cleaning todo cards, wrote them in the database. Then he searched for them based on regex
 
-Given User create cards with descryption about <descryption1>, <descryption2>, <descryption3>
+Given User create cards with description about <description1>, <description2>, <description3>
 And save them in database
-When user wants find card with descrition about <regex>
-Then service returned cards with descryption contains <word>
+When user wants find card with description about <regex>
+Then service returned cards with description contains <word>
 
 Examples:
 |descryption1|descryption2|descryption3|regex|word|
@@ -18,7 +18,7 @@ And save them in database
 And user create list with two cards to remove: <id5>, <id6>
 When user remove cards by list cards to remove
 Then database not contains list cards to remove
-And size elements in datebase is <size>
+And size elements in database is <size>
 
 
 Examples:
