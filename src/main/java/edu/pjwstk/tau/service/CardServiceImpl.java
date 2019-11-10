@@ -103,6 +103,10 @@ public class CardServiceImpl implements CardService {
 		}
 	}
 
+	public void clean(){
+		cardHashMap.clear();
+	}
+
 	private Predicate<String> createPredicateFromString(String s) {
 		return Pattern.compile(s).asPredicate();
 	}
