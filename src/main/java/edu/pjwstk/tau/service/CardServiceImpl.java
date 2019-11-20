@@ -1,19 +1,19 @@
 package edu.pjwstk.tau.service;
 
 
-
 import edu.pjwstk.tau.domain.Card;
+import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+@Service
 public class CardServiceImpl implements CardService {
 
 	private HashMap<Integer, Card> cardHashMap;
+
 	private DateServiceProxy dateService;
 	private EnumSet<OperationType> activeOperationsForTimeAssign;
 

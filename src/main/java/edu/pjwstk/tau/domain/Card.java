@@ -1,14 +1,27 @@
 package edu.pjwstk.tau.domain;
 
-import lombok.Builder;
+import lombok.*;
 
-@Builder
+import javax.persistence.*;
+
+@Builder(toBuilder = true)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Setter(value = AccessLevel.PACKAGE)
+@Getter
+@Entity
 public class Card implements Cloneable, DeepClone<Card> {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String title;
 	private String description;
+	@Enumerated(EnumType.STRING)
 	private CardStatus cardStatus;
+	@ManyToOne
 	private User owner;
+	@OneToOne
 	private CardHistory cardHistory;
 
 	public int getId() {

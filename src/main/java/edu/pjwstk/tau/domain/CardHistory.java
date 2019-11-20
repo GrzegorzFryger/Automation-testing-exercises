@@ -1,11 +1,25 @@
 package edu.pjwstk.tau.domain;
 
-import lombok.Builder;
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Builder
+
+@Builder(toBuilder = true)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Setter(value = AccessLevel.PACKAGE)
+@Getter
+@Entity
 public class CardHistory implements Cloneable, DeepClone<CardHistory> {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 	private LocalDateTime addedTime;
 	private LocalDateTime modificationTime;
 	private LocalDateTime readingTime;
