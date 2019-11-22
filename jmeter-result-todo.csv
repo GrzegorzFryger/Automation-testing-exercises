@@ -1,0 +1,41 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1574445325548,242,Add card,200,,Thread Group 1-3,text,true,,420,497,5,5,http://localhost:8080/card,241,0,1
+1574445325747,43,Add card,200,,Thread Group 1-5,text,true,,421,497,5,5,http://localhost:8080/card,42,0,1
+1574445325456,334,Add card,200,,Thread Group 1-1,text,true,,420,497,5,5,http://localhost:8080/card,333,0,28
+1574445325647,143,Add card,200,,Thread Group 1-4,text,true,,420,497,5,5,http://localhost:8080/card,142,0,1
+1574445325456,334,Add card,200,,Thread Group 1-2,text,true,,420,497,5,5,http://localhost:8080/card,333,0,28
+1574445325792,13,Get card by id:  1,200,,Thread Group 1-1,text,true,,441,124,5,5,http://localhost:8080/card/1,13,0,0
+1574445325792,13,Get card by id:  5,200,,Thread Group 1-5,text,true,,442,124,5,5,http://localhost:8080/card/5,13,0,0
+1574445325792,14,Get card by id:  2,200,,Thread Group 1-2,text,true,,441,124,5,5,http://localhost:8080/card/2,13,0,0
+1574445325792,14,Get card by id:  4,200,,Thread Group 1-4,text,true,,441,124,5,5,http://localhost:8080/card/4,13,0,0
+1574445325792,14,Get card by id:  3,200,,Thread Group 1-3,text,true,,441,124,5,5,http://localhost:8080/card/3,13,0,0
+1574445325807,11,Update card,200,,Thread Group 1-4,text,true,,457,503,5,5,http://localhost:8080/card,11,0,0
+1574445325806,12,Update card,200,,Thread Group 1-1,text,true,,457,503,5,5,http://localhost:8080/card,12,0,0
+1574445325806,15,Update card,200,,Thread Group 1-2,text,true,,457,503,5,5,http://localhost:8080/card,15,0,0
+1574445325806,16,Update card,200,,Thread Group 1-5,text,true,,458,503,5,5,http://localhost:8080/card,16,0,0
+1574445325807,16,Update card,200,,Thread Group 1-3,text,true,,457,503,5,5,http://localhost:8080/card,16,0,0
+1574445325818,21,Delete card 1,200,,Thread Group 1-1,,true,,73,210,5,5,http://localhost:8080/card/1,21,0,0
+1574445325822,17,Delete card 2,200,,Thread Group 1-2,,true,,73,210,5,5,http://localhost:8080/card/2,17,0,0
+1574445325822,17,Delete card 5,200,,Thread Group 1-5,,true,,73,210,5,5,http://localhost:8080/card/5,17,0,0
+1574445325823,16,Delete card 3,200,,Thread Group 1-3,,true,,73,210,5,5,http://localhost:8080/card/3,16,0,0
+1574445325818,21,Delete card 4,200,,Thread Group 1-4,,true,,73,210,5,5,http://localhost:8080/card/4,21,0,0
+1574445325849,8,Add card,200,,Thread Group 1-6,text,true,,421,497,1,1,http://localhost:8080/card,7,0,0
+1574445325857,5,Get card by id:  6,200,,Thread Group 1-6,text,true,,441,124,1,1,http://localhost:8080/card/6,5,0,0
+1574445325862,7,Update card,200,,Thread Group 1-6,text,true,,458,503,1,1,http://localhost:8080/card,7,0,0
+1574445325870,5,Delete card 6,200,,Thread Group 1-6,,true,,73,210,1,1,http://localhost:8080/card/6,5,0,0
+1574445325947,7,Add card,200,,Thread Group 1-7,text,true,,421,497,1,1,http://localhost:8080/card,7,0,0
+1574445325954,5,Get card by id:  7,200,,Thread Group 1-7,text,true,,442,124,1,1,http://localhost:8080/card/7,5,0,0
+1574445325959,7,Update card,200,,Thread Group 1-7,text,true,,458,503,1,1,http://localhost:8080/card,7,0,0
+1574445325967,5,Delete card 7,200,,Thread Group 1-7,,true,,73,210,1,1,http://localhost:8080/card/7,5,0,0
+1574445326047,10,Add card,200,,Thread Group 1-8,text,true,,421,497,1,1,http://localhost:8080/card,10,0,1
+1574445326058,5,Get card by id:  8,200,,Thread Group 1-8,text,true,,442,124,1,1,http://localhost:8080/card/8,5,0,0
+1574445326064,11,Update card,200,,Thread Group 1-8,text,true,,458,503,1,1,http://localhost:8080/card,10,0,0
+1574445326075,8,Delete card 8,200,,Thread Group 1-8,,true,,73,210,1,1,http://localhost:8080/card/8,8,0,0
+1574445326147,8,Add card,200,,Thread Group 1-9,text,true,,421,497,1,1,http://localhost:8080/card,8,0,1
+1574445326156,4,Get card by id:  9,200,,Thread Group 1-9,text,true,,442,124,1,1,http://localhost:8080/card/9,4,0,0
+1574445326161,8,Update card,200,,Thread Group 1-9,text,true,,458,503,1,1,http://localhost:8080/card,7,0,0
+1574445326169,5,Delete card 9,200,,Thread Group 1-9,,true,,73,210,1,1,http://localhost:8080/card/9,5,0,0
+1574445326246,7,Add card,200,,Thread Group 1-10,text,true,,425,500,1,1,http://localhost:8080/card,7,0,1
+1574445326253,4,Get card by id:  10,200,,Thread Group 1-10,text,true,,446,125,1,1,http://localhost:8080/card/10,4,0,0
+1574445326258,5,Update card,200,,Thread Group 1-10,text,true,,461,506,1,1,http://localhost:8080/card,5,0,0
+1574445326263,5,Delete card 10,200,,Thread Group 1-10,,true,,73,211,1,1,http://localhost:8080/card/10,5,0,0

@@ -65,6 +65,7 @@ public class CardHistory implements Cloneable, DeepClone<CardHistory> {
 		this.card = card;
 	}
 
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -72,23 +73,19 @@ public class CardHistory implements Cloneable, DeepClone<CardHistory> {
 
 		CardHistory that = (CardHistory) o;
 
-		if (getId() != that.getId()) return false;
-		if (getAddedTime() != null ? !getAddedTime().equals(that.getAddedTime()) : that.getAddedTime() != null)
+		if (id != that.id) return false;
+		if (addedTime != null ? !addedTime.equals(that.addedTime) : that.addedTime != null) return false;
+		if (modificationTime != null ? !modificationTime.equals(that.modificationTime) : that.modificationTime != null)
 			return false;
-		if (getModificationTime() != null ? !getModificationTime().equals(that.getModificationTime()) : that.getModificationTime() != null)
-			return false;
-		if (getReadingTime() != null ? !getReadingTime().equals(that.getReadingTime()) : that.getReadingTime() != null)
-			return false;
-		return getCard() != null ? getCard().equals(that.getCard()) : that.getCard() == null;
+		return readingTime != null ? readingTime.equals(that.readingTime) : that.readingTime == null;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getId();
-		result = 31 * result + (getAddedTime() != null ? getAddedTime().hashCode() : 0);
-		result = 31 * result + (getModificationTime() != null ? getModificationTime().hashCode() : 0);
-		result = 31 * result + (getReadingTime() != null ? getReadingTime().hashCode() : 0);
-		result = 31 * result + (getCard() != null ? getCard().hashCode() : 0);
+		int result = id;
+		result = 31 * result + (addedTime != null ? addedTime.hashCode() : 0);
+		result = 31 * result + (modificationTime != null ? modificationTime.hashCode() : 0);
+		result = 31 * result + (readingTime != null ? readingTime.hashCode() : 0);
 		return result;
 	}
 

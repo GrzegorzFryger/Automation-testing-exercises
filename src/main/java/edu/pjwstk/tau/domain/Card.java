@@ -87,6 +87,7 @@ public class Card implements Cloneable, DeepClone<Card> {
 		this.cardHistory = cardHistory;
 	}
 
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -94,23 +95,22 @@ public class Card implements Cloneable, DeepClone<Card> {
 
 		Card card = (Card) o;
 
-		if (getId() != card.getId()) return false;
-		if (getTitle() != null ? !getTitle().equals(card.getTitle()) : card.getTitle() != null) return false;
-		if (getDescription() != null ? !getDescription().equals(card.getDescription()) : card.getDescription() != null)
-			return false;
-		if (getCardStatus() != card.getCardStatus()) return false;
-		if (getOwner() != null ? !getOwner().equals(card.getOwner()) : card.getOwner() != null) return false;
-		return getCardHistory() != null ? getCardHistory().equals(card.getCardHistory()) : card.getCardHistory() == null;
+		if (id != card.id) return false;
+		if (title != null ? !title.equals(card.title) : card.title != null) return false;
+		if (description != null ? !description.equals(card.description) : card.description != null) return false;
+		if (cardStatus != card.cardStatus) return false;
+		if (owner != null ? !owner.equals(card.owner) : card.owner != null) return false;
+		return cardHistory != null ? cardHistory.equals(card.cardHistory) : card.cardHistory == null;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getId();
-		result = 31 * result + (getTitle() != null ? getTitle().hashCode() : 0);
-		result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-		result = 31 * result + (getCardStatus() != null ? getCardStatus().hashCode() : 0);
-		result = 31 * result + (getOwner() != null ? getOwner().hashCode() : 0);
-		result = 31 * result + (getCardHistory() != null ? getCardHistory().hashCode() : 0);
+		int result = id;
+		result = 31 * result + (title != null ? title.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (cardStatus != null ? cardStatus.hashCode() : 0);
+		result = 31 * result + (owner != null ? owner.hashCode() : 0);
+		result = 31 * result + (cardHistory != null ? cardHistory.hashCode() : 0);
 		return result;
 	}
 
