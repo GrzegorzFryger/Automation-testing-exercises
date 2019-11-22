@@ -14,31 +14,28 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CardServiceImplTest {
+public class CardServiceCacheTest {
 
 	@Mock
 	private DateServiceProxy dateService;
 
 	private Card firstCard;
 	private Card secondCard;
-	private CardServiceImpl cardService;
+	private CardServiceCache cardService;
 	private List<Card> cardList;
 	private LocalDateTime nowTime;
 
 	@Before
 	public void setUp() throws Exception {
-		cardService = new CardServiceImpl(dateService);
+		cardService = new CardServiceCache(dateService);
 		nowTime = LocalDateTime.now();
 
 		firstCard = Card.builder()

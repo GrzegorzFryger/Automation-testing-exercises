@@ -1,11 +1,9 @@
 package edu.pjwstk.tau.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -18,12 +16,14 @@ import java.time.LocalDateTime;
 public class CardHistory implements Cloneable, DeepClone<CardHistory> {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private LocalDateTime addedTime;
 	private LocalDateTime modificationTime;
 	private LocalDateTime readingTime;
-
+	@OneToOne(fetch = FetchType.LAZY)
+	@MapsId
+	@JsonIgnore
+	private Card card;
 
 	public LocalDateTime getAddedTime() {
 		return addedTime;
@@ -49,6 +49,22 @@ public class CardHistory implements Cloneable, DeepClone<CardHistory> {
 		this.readingTime = readingTime;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -56,18 +72,23 @@ public class CardHistory implements Cloneable, DeepClone<CardHistory> {
 
 		CardHistory that = (CardHistory) o;
 
+		if (getId() != that.getId()) return false;
 		if (getAddedTime() != null ? !getAddedTime().equals(that.getAddedTime()) : that.getAddedTime() != null)
 			return false;
 		if (getModificationTime() != null ? !getModificationTime().equals(that.getModificationTime()) : that.getModificationTime() != null)
 			return false;
-		return getReadingTime() != null ? getReadingTime().equals(that.getReadingTime()) : that.getReadingTime() == null;
+		if (getReadingTime() != null ? !getReadingTime().equals(that.getReadingTime()) : that.getReadingTime() != null)
+			return false;
+		return getCard() != null ? getCard().equals(that.getCard()) : that.getCard() == null;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getAddedTime() != null ? getAddedTime().hashCode() : 0;
+		int result = getId();
+		result = 31 * result + (getAddedTime() != null ? getAddedTime().hashCode() : 0);
 		result = 31 * result + (getModificationTime() != null ? getModificationTime().hashCode() : 0);
 		result = 31 * result + (getReadingTime() != null ? getReadingTime().hashCode() : 0);
+		result = 31 * result + (getCard() != null ? getCard().hashCode() : 0);
 		return result;
 	}
 

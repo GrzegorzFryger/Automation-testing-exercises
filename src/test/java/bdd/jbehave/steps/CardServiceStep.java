@@ -4,7 +4,7 @@ import edu.pjwstk.tau.domain.Card;
 import edu.pjwstk.tau.domain.CardHistory;
 import edu.pjwstk.tau.domain.CardStatus;
 import edu.pjwstk.tau.domain.User;
-import edu.pjwstk.tau.service.CardServiceImpl;
+import edu.pjwstk.tau.service.CardServiceCache;
 import edu.pjwstk.tau.service.DataServiceProxyImpl;
 import edu.pjwstk.tau.service.OperationType;
 import org.jbehave.core.annotations.Given;
@@ -16,19 +16,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class CardServiceStep {
-	private CardServiceImpl cardService;
+	private CardServiceCache cardService;
 	private List<Card> cardList;
 	private List<Card> cardListWithRegex;
 	private List<Card> cardListToRemove;
 
 
 	public CardServiceStep() {
-		this.cardService =  new CardServiceImpl(new DataServiceProxyImpl());
+		this.cardService =  new CardServiceCache(new DataServiceProxyImpl());
 		cardService.turnOffTimeAssign(OperationType.ADD,OperationType.READ, OperationType.UPDATE);
 	}
 

@@ -4,7 +4,7 @@ import edu.pjwstk.tau.domain.Card;
 import edu.pjwstk.tau.domain.CardHistory;
 import edu.pjwstk.tau.domain.CardStatus;
 import edu.pjwstk.tau.domain.User;
-import edu.pjwstk.tau.service.CardServiceImpl;
+import edu.pjwstk.tau.service.CardServiceCache;
 import edu.pjwstk.tau.service.DataServiceProxyImpl;
 import edu.pjwstk.tau.service.OperationType;
 import io.cucumber.java.en.Given;
@@ -23,14 +23,14 @@ import static org.junit.Assert.assertTrue;
 
 public class CardServiceSteps {
 
-	private CardServiceImpl cardService;
+	private CardServiceCache cardService;
 	private List<Card> cardList;
 	private List<Card> cardListWithRegex;
 	private List<Card> cardListToRemove;
 
 
 	public CardServiceSteps() {
-		this.cardService =  new CardServiceImpl(new DataServiceProxyImpl());
+		this.cardService =  new CardServiceCache(new DataServiceProxyImpl());
 		cardService.turnOffTimeAssign(OperationType.ADD,OperationType.READ, OperationType.UPDATE);
 	}
 

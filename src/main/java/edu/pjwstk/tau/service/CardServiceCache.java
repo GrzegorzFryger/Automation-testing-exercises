@@ -4,24 +4,20 @@ package edu.pjwstk.tau.service;
 import edu.pjwstk.tau.domain.Card;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CardServiceImpl implements CardService {
+public class CardServiceCache extends CardServiceAbstract implements CardService {
 
 	private HashMap<Integer, Card> cardHashMap;
 
-	private DateServiceProxy dateService;
-	private EnumSet<OperationType> activeOperationsForTimeAssign;
 
-
-	public CardServiceImpl(DateServiceProxy dateService) {
-		this.dateService = dateService;
+	public CardServiceCache(DateServiceProxy dateService) {
+		super(dateService);
 		this.cardHashMap = new HashMap<>();
-		this.activeOperationsForTimeAssign = OperationType.ALL_OPERATION;
 	}
 
 	@Override
@@ -78,10 +74,10 @@ public class CardServiceImpl implements CardService {
 	public List<Card> readAll() {
 		return cardHashMap.keySet().stream()
 				.map((x) -> {
-							Card card = createDeepClone(cardHashMap.get(x));
-							assignTimeRead(card);
-							return card;
-						})
+					Card card = createDeepClone(cardHashMap.get(x));
+					assignTimeRead(card);
+					return card;
+				})
 				.collect(Collectors.toList());
 	}
 
@@ -107,40 +103,6 @@ public class CardServiceImpl implements CardService {
 		cardHashMap.clear();
 	}
 
-	private Predicate<String> createPredicateFromString(String s) {
-		return Pattern.compile(s).asPredicate();
-	}
-
-	public void turnOffTimeAssign(OperationType ... operationTypes){
-		List<OperationType> operationsToRemove = new ArrayList<>(Arrays.asList(operationTypes));
-		this.activeOperationsForTimeAssign.removeAll(operationsToRemove);
-	}
-
-	public void turnOnTimeAssign(OperationType ... operationTypes){
-
-		EnumSet<OperationType> operationToAdd = Arrays.stream(operationTypes)
-				.collect(Collectors.toCollection(()-> EnumSet.noneOf(OperationType.class)));
-
-		activeOperationsForTimeAssign.addAll(operationToAdd);
-	}
-
-	private void assignDateCreation(Card card){
-		if(activeOperationsForTimeAssign.contains(OperationType.ADD)){
-			card.getCardHistory().setAddedTime(dateService.getNow());
-		}
-	}
-
-	private void assignTimeModification(Card card){
-		if(activeOperationsForTimeAssign.contains(OperationType.UPDATE)) {
-			card.getCardHistory().setModificationTime(dateService.getNow());
-		}
-	}
-
-	private void assignTimeRead(Card card) {
-		if(activeOperationsForTimeAssign.contains(OperationType.READ)){
-			card.getCardHistory().setReadingTime(dateService.getNow());
-		}
-	}
 
 	private Card createDeepClone(Card object) {
 		return object.deepClone();

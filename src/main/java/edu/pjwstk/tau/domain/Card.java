@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+
 @Builder(toBuilder = true)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
@@ -12,16 +13,22 @@ import javax.persistence.*;
 @Entity
 public class Card implements Cloneable, DeepClone<Card> {
 
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String title;
 	private String description;
 	@Enumerated(EnumType.STRING)
 	private CardStatus cardStatus;
-	@ManyToOne
+	@ManyToOne()
+	@JoinColumn(name = "fk_owner")
 	private User owner;
-	@OneToOne
+	@OneToOne(
+			mappedBy = "card",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true,
+			fetch = FetchType.LAZY
+	)
 	private CardHistory cardHistory;
 
 	public int getId() {
@@ -69,6 +76,14 @@ public class Card implements Cloneable, DeepClone<Card> {
 	}
 
 	public void setCardHistory(CardHistory cardHistory) {
+		if (cardHistory == null) {
+			if (this.cardHistory != null) {
+				this.cardHistory.setCard(null);
+			}
+		}
+		else {
+			cardHistory.setCard(this);
+		}
 		this.cardHistory = cardHistory;
 	}
 
