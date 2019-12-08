@@ -12,4 +12,4 @@ Testowanie automatyczne, projekt laboratoria
 [Pliki Jmeter](https://github.com/GrzegorzFryger/Tau-ToDoList/tree/master/src/test/jmeter)
 
 # Lab5
-[Selenium test](https://github.com/GrzegorzFryger/Tau-ToDoList/tree/master/src/test/jmeter)
+[Selenium test](https://github.com/GrzegorzFryger/Tau-ToDoList/tree/master/src/test/java/selenium)
