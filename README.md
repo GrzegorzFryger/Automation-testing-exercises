@@ -13,3 +13,6 @@ Testowanie automatyczne, projekt laboratoria
 
 # Lab5
 [Selenium test](https://github.com/GrzegorzFryger/Tau-ToDoList/tree/master/src/test/java/selenium)
+
+# Lab6
+[Robot Framework](https://github.com/GrzegorzFryger/Tau-Lab6)
