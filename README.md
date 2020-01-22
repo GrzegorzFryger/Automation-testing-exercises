@@ -16,3 +16,9 @@ Testowanie automatyczne, projekt laboratoria
 
 # Lab6
 [Robot Framework](https://github.com/GrzegorzFryger/Tau-Lab6)
+
+# Lab7
+[Catch2](https://github.com/GrzegorzFryger/Tau-Lab07)
+
+# Lab8
+[Jasmine & Karma](https://github.com/GrzegorzFryger/Tau-Lab08)
