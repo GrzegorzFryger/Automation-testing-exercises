@@ -1,0 +1,5 @@
+language: java
+script: 
+  - cd Cucumber\,\ jBehave\,\ Jmeter\,\ Selenium/
+  - mvn clean install
+
