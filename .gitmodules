@@ -1,0 +1,15 @@
+[submodule "robot framework/Automation-testing-Robot-Framework"]
+	path = robot framework/Automation-testing-Robot-Framework
+	url = https://github.com/GrzegorzFryger/Automation-testing-Robot-Framework
+[submodule "Automation-testing-Robot-Framework"]
+	path = Automation-testing-Robot-Framework
+	url = https://github.com/GrzegorzFryger/Automation-testing-Robot-Framework
+[submodule "Tau-Lab07"]
+	path = Tau-Lab07
+	url = https://github.com/GrzegorzFryger/Tau-Lab07
+[submodule "Automation-testing-Catch-2"]
+	path = Automation-testing-Catch-2
+	url = https://github.com/GrzegorzFryger/Automation-testing-Catch-2
+[submodule "Automation-testing-Jasmine-Karma"]
+	path = Automation-testing-Jasmine-Karma
+	url = https://github.com/GrzegorzFryger/Automation-testing-Jasmine-Karma
